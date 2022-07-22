@@ -12,7 +12,6 @@ let styles = {                 // Styles applied to stdout
   bool: 'blue',      // true false
   regexp: 'green',     // /\d+/
 };
-
 var inspect = require('eyes').inspector({ styles });
 
 (async () => {
