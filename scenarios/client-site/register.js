@@ -1,5 +1,5 @@
 
-/* let login = require('./login'); */
+// Registration creds random automated generation
 
 function makeid(length) {
   var result = '';
@@ -35,13 +35,13 @@ function makePass(length) {
 };
 
 
-
+//asign strings ti variables
 const newId = makeid(6);
 const newMail = makeMail(8);
 const newUser = `${newId}@${newMail}.com`;
 let newPass = makePass(8);
 
-
+// validate password criterias
 function checkRegex(newPass) {
   validPass = false;
   var checkSpecial = /[*@!#%&()^~{}]+/.test(newPass),
@@ -62,6 +62,7 @@ while (!validPass) {
   newPass = makePass(8);
   checkRegex(newPass);
 };
+///////////////////////////////////////////////////////////////////
 
 module.exports = async function (browser) {
 
