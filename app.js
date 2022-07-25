@@ -1,5 +1,5 @@
-let incidents = require('./sections/incidents');
-let users = require('./sections/user');
+/* let incidents = require('./launchers/incidents'); */
+let users = require('./launchers/user');
 
 let styles = {                 // Styles applied to stdout
   all: 'red',      // Overall style applied to everything
@@ -17,6 +17,6 @@ var inspect = require('eyes').inspector({ styles });
 (async () => {
   Promise.allSettled([
     users.start(),
-    incidents.start()
+/*     incidents.start() */
   ]).then(/* console.log.bind(console) */success => inspect(success), console.error.bind(console));
 })()
