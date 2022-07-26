@@ -1,4 +1,4 @@
-// Registration creds random automated generation
+//Registration creds random automated generation
 
 function makeid(length) {
   var result = '';
@@ -32,16 +32,16 @@ function makePass(length) {
   return result;
 }
 
-// asign strings to variables
+//asign strings to variables
 const newId = makeid(6);
 const newMail = makeMail(8);
 const newUser = `${newId}@${newMail}.com`;
 let newPass = makePass(8);
 
-// validate password criterias
+//validate password criterias
 function checkRegex(newPass) {
   validPass = false;
-  var checkSpecial = /[*@!#%&()^~{}]+/.test(newPass),
+  var checkSpecial = /[*@!%&()^~{}]+/.test(newPass),
     checkUpper = /[A-Z]+/.test(newPass),
     checkLower = /[a-z]+/.test(newPass);
   checkMin = /^(?=.*\d).{8,}$/.test(newPass);
@@ -58,7 +58,7 @@ while (!validPass) {
   newPass = makePass(8);
   checkRegex(newPass);
 }
-///////////////////////////////////////////////////////////////////
+//main component
 
 module.exports = async function (browser) {
   const page = await browser.newPage();
