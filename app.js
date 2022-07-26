@@ -1,5 +1,5 @@
 /* let incidents = require('./launchers/incidents'); */
-let users = require('./launchers/user');
+let users = require('./launchers/users');
 
 let styles = {
   // Styles applied to stdout

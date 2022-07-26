@@ -1,5 +1,5 @@
+let login = require('./login');
 //Registration creds random automated generation
-
 function generate(field, length) {
   var result = '';
   switch (field) {
@@ -28,7 +28,7 @@ let length;
 const newId = generate((field = 'id'), (length = 6));
 const newMail = generate((field = 'mail'), (length = 6));
 const newUser = `${newId}@${newMail}.com`;
-let newPass = generate((field = 'pass'), (length = 10));
+let newPass = generate((field = 'pass'), (length = 12));
 
 //validate password criterias
 function checkRegex(newPass) {
@@ -47,7 +47,7 @@ function checkRegex(newPass) {
 
 checkRegex(newPass);
 while (!validPass) {
-  newPass = generate((field = 'pass'), (length = 10));
+  newPass = generate((field = 'pass'), (length = 12));
   checkRegex(newPass);
 }
 //main component
@@ -60,7 +60,6 @@ module.exports = async function (browser) {
 
   await page.type('#form > input:nth-child(2)', newUser, { delay: 100 });
   await page.type('#pass', newPass, { delay: 100 });
-  await page.waitForTimeout(6000);
   await page.type('#form > input:nth-child(6)', newPass, { delay: 100 });
   await page.click('#root > div > div > div > div.card > div > form > button');
   await page.waitForNavigation();
@@ -72,6 +71,11 @@ module.exports = async function (browser) {
   console.log(newMail);
   console.log(newUser);
   console.log(newPass);
+
+  login(browser, newUser, newPass);
+
+  /*   await page.waitForNavigation(); */
+  await page.waitForTimeout(7000);
   await page.close();
 
   return { Register: 'worked' };
