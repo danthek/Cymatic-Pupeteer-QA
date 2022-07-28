@@ -1,4 +1,6 @@
-let login = require('./login');
+// Import storage file for variable sharing
+let Store = require('../../store');
+
 //Registration creds random automated generation
 function generate(field, length) {
   var result = '';
@@ -23,12 +25,12 @@ function generate(field, length) {
 }
 
 //asign strings to variables
-let field;
-let length;
-const newId = generate((field = 'id'), (length = 6));
-const newMail = generate((field = 'mail'), (length = 6));
-const newUser = `${newId}@${newMail}.com`;
-let newPass = generate((field = 'pass'), (length = 12));
+var field;
+var length;
+var newId = generate((field = 'id'), (length = 6));
+var newMail = generate((field = 'mail'), (length = 6));
+var newUser = `${newId}@${newMail}.com`;
+var newPass = generate((field = 'pass'), (length = 12));
 
 //validate password criterias
 function checkRegex(newPass) {
@@ -45,18 +47,24 @@ function checkRegex(newPass) {
   return validPass;
 }
 
+// Ensure the password gets created following the criterias
 checkRegex(newPass);
 while (!validPass) {
   newPass = generate((field = 'pass'), (length = 12));
   checkRegex(newPass);
 }
-//main component
 
+//seting storage credentials
+Store.setUser(newUser);
+Store.setPass(newPass);
+
+//main component
 module.exports = async function (browser) {
   const page = await browser.newPage();
   //Configure the navigation timeout
-  await page.setDefaultNavigationTimeout(0);
+   /*  await page.setDefaultNavigationTimeout(0); */
   await page.goto('http://localhost:3000/signup');
+  await page.waitForTimeout(5000);
 
   await page.type('#form > input:nth-child(2)', newUser, { delay: 100 });
   await page.type('#pass', newPass, { delay: 100 });
@@ -67,16 +75,14 @@ module.exports = async function (browser) {
   await page.click(
     ' #root > div > div > div > div.d-flex.align-items-center.container > div > button'
   );
-  console.log(newId);
-  console.log(newMail);
-  console.log(newUser);
-  console.log(newPass);
-
-  login(browser, newUser, newPass);
+  console.log('//////// Registration ////////');
+  console.log('Id: ', newId);
+  console.log('mail: ', newMail);
+  console.log('user: ', newUser);
+  console.log('password: ', newPass);
 
   /*   await page.waitForNavigation(); */
-  await page.waitForTimeout(7000);
+ /*    await page.waitForTimeout(25000); */
   await page.close();
-
   return { Register: 'worked' };
 };

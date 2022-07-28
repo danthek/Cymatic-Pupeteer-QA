@@ -1,4 +1,4 @@
-/* let incidents = require('./launchers/incidents'); */
+let incidents = require('./launchers/incidents');
 let users = require('./launchers/users');
 
 let styles = {
@@ -16,8 +16,9 @@ let styles = {
 var inspect = require('eyes').inspector({ styles });
 
 (async () => {
-  Promise.allSettled([
-    users.start(),
-    /*     incidents.start() */
-  ]).then((success) => inspect(success), console.error.bind(console));
+  //Comment/uncomment the desired launchers as needed
+  Promise.allSettled([users.start()/* , incidents.start() */]).then(
+    (success) => inspect(success),
+    console.error.bind(console)
+  );
 })();
