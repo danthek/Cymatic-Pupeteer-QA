@@ -1,39 +1,31 @@
-function delay(time) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, time);
-  });
-}
+let Store = require('../../credentials/storeCreds');
 
-module.exports = async function (browser, finalUser, finalPass) {
+module.exports = async function (browser) {
+  var finalUser = Store.getUser();
+  var finalPass = Store.getPass();
+  user = finalUser ? finalUser : 'user@nomail.com';
+  password = finalPass ? finalPass : 'password';
+  const page = await browser.newPage();
 
-    
-    const page = await browser.newPage();
-    /*  await page.setDefaultNavigationTimeout(0); */
-    await page.goto('http://localhost:3000/login');
-    await page.waitForTimeout(15000);
-    
+  await page.goto('http://localhost:3000/login');
+  await page.waitForTimeout(15000);
+  await page.type(
+    '#form > input:nth-child(2)', user,
+    { delay: 100 }
+  ),
     await page.type(
-      '#form > input:nth-child(2)',
-      finalUser ? finalUser : 'user@nomail.com',
+      '#form > input:nth-child(4)', password,
       { delay: 100 }
-      ),
-      await page.type(
-        '#form > input:nth-child(4)',
-        finalPass ? finalPass : 'password',
-        { delay: 100 }
-        ),
-        await page.click(
-          '#root > div > div > div > div > div.card > div > form > button'
-          ),
-          /*     await page.waitForTimeout(1000); */
-          /*    await page.waitForNavigation(); */
-          console.log('//////// Login ////////');
-          
-          console.log('user: ', finalUser);
-          console.log('password: ', finalPass);
-          await delay(7000);
-        
-          await page.close();
-          return { Login: 'worked' };
-        };
-        
+    ),
+    await page.click(
+      '#root > div > div > div > div > div.card > div > form > button'
+    ),
+    
+  console.log('//////// Login ////////');
+  console.log('user: ', user);
+  console.log('password: ', password);
+
+  await page.waitForTimeout(5000)
+  await page.close();
+  return { Login: 'worked' };
+};

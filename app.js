@@ -1,9 +1,9 @@
-let incidents = require('./launchers/incidents');
-let users = require('./launchers/users');
-
+let staticIncidents = require('./launchers/staticIncidents');
+let clientSiteAuth = require('./launchers/clientSiteAuth');
+let Storelaunchers = require('./launchers/storeLaunchers')
 let styles = {
   // Styles applied to stdout
-  all: 'red', // Overall style applied to everything
+  all: 'yellow', // Overall style applied to everything
   label: 'underline', // Inspection labels, like 'array' in `array: [1, 2, 3]`
   other: 'inverted', // Objects which don't have a literal representation, such as functions
   key: 'bold', // The keys in object literals, like 'a' in `{a: 1}`
@@ -15,10 +15,17 @@ let styles = {
 };
 var inspect = require('eyes').inspector({ styles });
 
+// change true/false in order to run login/registration or both
+Storelaunchers.setLogin(true);
+Storelaunchers.setregister(false);
 (async () => {
   //Comment/uncomment the desired launchers as needed
-  Promise.allSettled([users.start()/* , incidents.start() */]).then(
+  Promise.allSettled([
+    /* clientSiteAuth.start(), */
+    staticIncidents.start()  
+  ]).then(
     (success) => inspect(success),
     console.error.bind(console)
   );
 })();
+
