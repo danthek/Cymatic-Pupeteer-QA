@@ -1,6 +1,6 @@
 let staticIncidents = require('./launchers/staticIncidents');
 let clientSiteAuth = require('./launchers/clientSiteAuth');
-let Storelaunchers = require('./launchers/storeLaunchers')
+let Storelaunchers = require('./launchers/storeLaunchers');
 let styles = {
   // Styles applied to stdout
   all: 'yellow', // Overall style applied to everything
@@ -16,16 +16,13 @@ let styles = {
 var inspect = require('eyes').inspector({ styles });
 
 // change true/false in order to run login/registration or both
+// if setregister is false, the login component will use: user: user & password: password
 Storelaunchers.setLogin(true);
-Storelaunchers.setregister(false);
+Storelaunchers.setRegister(true);
 (async () => {
   //Comment/uncomment the desired launchers as needed
   Promise.allSettled([
     /* clientSiteAuth.start(), */
-    staticIncidents.start()  
-  ]).then(
-    (success) => inspect(success),
-    console.error.bind(console)
-  );
+    staticIncidents.start(),
+  ]).then((success) => inspect(success), console.error.bind(console));
 })();
-

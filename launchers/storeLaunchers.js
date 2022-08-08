@@ -1,13 +1,12 @@
 module.exports = {
-  loginTest : null,
-  registerTest : null,
-
+  login: null,
+  register: null,
 
   //set variables
   setLogin(loginTest) {
     this.login = loginTest;
   },
-  setregister(registerTest) {
+  setRegister(registerTest) {
     this.register = registerTest;
   },
 
@@ -18,5 +17,4 @@ module.exports = {
   getRegister() {
     return this.register;
   },
-
-}
+};

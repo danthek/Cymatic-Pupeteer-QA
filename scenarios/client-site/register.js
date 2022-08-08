@@ -1,6 +1,6 @@
 // Import storage file for variable sharing & Random creds component
 let Store = require('../../credentials/storeCreds');
-let randomCreds = require('../../credentials/randomCreds')
+let randomCreds = require('../../credentials/randomCreds');
 
 //main component
 module.exports = async function (browser) {

@@ -3,11 +3,11 @@ module.exports = async function (browser) {
   await page.goto('http://localhost:3000/login');
 
   const client = await page.target().createCDPSession();
-  await page.waitForTimeout(3000);
+  /*  await page.setDefaultNavigationTimeout(0); */
+  await page.waitForTimeout(4000);
   await client.send('Runtime.evaluate', {
     includeCommandLineAPI: true,
-    expression:
-      `$.ajax({
+    expression: `$.ajax({
       type: "POST",
       crossdomain: true,
       url: "https://corp.toei-anim.co.jp/en/index.html",
@@ -22,11 +22,11 @@ module.exports = async function (browser) {
       error: function (xhr, status, err) {
           console.error(xhr, status, err);
       }
-  });`
+  });
+  `,
   });
 
   await page.close();
 
-
-  return { cors: 'worked' }
+  return { cors: 'worked' };
 };

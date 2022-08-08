@@ -2,7 +2,6 @@ module.exports = {
   user: null,
   password: null,
 
-
   //set variables
   setUser(newUser) {
     this.user = newUser;
@@ -20,10 +19,9 @@ module.exports = {
   },
 
   flushUser() {
-     delete this.user;
+    delete this.user;
   },
   flushPass() {
     delete this.password;
-  }
-
-}
+  },
+};

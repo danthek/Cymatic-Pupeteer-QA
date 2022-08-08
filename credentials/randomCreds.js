@@ -2,28 +2,28 @@ let Store = require('./storeCreds');
 
 //main component
 module.exports = async function () {
-//Randomly generated Creds.
-function generate(field, length) {
-  var result = '';
-  switch (field) {
-    case 'id':
-      var characters =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      break;
-    case 'mail':
-      var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-      break;
-    case 'pass':
-      var characters =
-        'AABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&()*+,-./:;<=>?[]^_{|}~';
+  //Randomly generated Creds.
+  function generate(field, length) {
+    var result = '';
+    switch (field) {
+      case 'id':
+        var characters =
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        break;
+      case 'mail':
+        var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        break;
+      case 'pass':
+        var characters =
+          'AABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&()*+,-./:;<=>?[]^_{|}~';
+    }
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    length = '';
+    return result;
   }
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  length = '';
-  return result;
-}
 
   //asign random strings to variables
   var field;
@@ -32,7 +32,7 @@ function generate(field, length) {
   var newMail = generate((field = 'mail'), (length = 6));
   var newUser = `${newId}@${newMail}.com`;
   var newPass = generate((field = 'pass'), (length = 12));
-  
+
   //validate password criterias
   function checkRegex(newPass) {
     validPass = false;
@@ -45,7 +45,7 @@ function generate(field, length) {
     }
     return validPass;
   }
-  
+
   // Ensure the password gets created following the criterias
   checkRegex(newPass);
   while (!validPass) {
@@ -53,8 +53,7 @@ function generate(field, length) {
     checkRegex(newPass);
   }
   return (
-  //set validated creds on Storage
-  Store.setUser(newUser),
-  Store.setPass(newPass)
-  )
+    //set validated creds on Storage
+    Store.setUser(newUser), Store.setPass(newPass)
+  );
 };
