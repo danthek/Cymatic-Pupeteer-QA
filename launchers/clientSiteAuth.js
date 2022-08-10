@@ -57,7 +57,7 @@ module.exports.start = async function () {
     createPromise(
       browser,
       registerTest,
-      (registerLoops = 3),
+      (registerLoops = 0),
       loginTest,
       (loginLoops = 5)
     )

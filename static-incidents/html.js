@@ -9,7 +9,7 @@ module.exports = async function (browser) {
     includeCommandLineAPI: true,
     expression: `
     var s = document.createElement( 'iframe' );
-    s.setAttribute( 'src', "https://www.nintendo.com/" );
+    s.setAttribute( 'src', "https://www.facebook.com/" );
     s.setAttribute( 'style', "height:500px;width:500px;top:0" );
     document.querySelector('body').appendChild( s );
     `,

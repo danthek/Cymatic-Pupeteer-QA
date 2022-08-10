@@ -42,7 +42,7 @@ function staticLoops(browser, loops) {
 module.exports.start = async function () {
   const browser = await puppeteer.launch({ headless: true });
 
-  let result = await Promise.allSettled(staticLoops(browser, (loops = 10)));
+  let result = await Promise.allSettled(staticLoops(browser, (loops = 3)));
 
   await browser.close();
   return result;

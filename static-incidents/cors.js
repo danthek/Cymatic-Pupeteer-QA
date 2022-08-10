@@ -10,7 +10,7 @@ module.exports = async function (browser) {
     expression: `$.ajax({
       type: "POST",
       crossdomain: true,
-      url: "https://corp.toei-anim.co.jp/en/index.html",
+      url: "https://en.gundam.info/",
       dataType: "json",
       data: JSON.stringify({
           anydata1: "any1",

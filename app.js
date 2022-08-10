@@ -18,11 +18,11 @@ var inspect = require('eyes').inspector({ styles });
 // change true/false in order to run login/registration or both
 // if setregister is false, the login component will use: user: user & password: password
 Storelaunchers.setLogin(true);
-Storelaunchers.setRegister(true);
+Storelaunchers.setRegister(false);
 (async () => {
   //Comment/uncomment the desired launchers as needed
   Promise.allSettled([
-    /* clientSiteAuth.start(), */
-    staticIncidents.start(),
+    clientSiteAuth.start(),
+    /* staticIncidents.start(), */
   ]).then((success) => inspect(success), console.error.bind(console));
 })();
