@@ -12,37 +12,26 @@ function staticLoops(browser, loops) {
     myPromise.push(
       new Promise((resolve, reject) => {
         xss(browser).then(resolve);
-      })
-    );
-  }
-  for (let index = 0; index < loops; index++) {
-    myPromise.push(
+      }),
       new Promise((resolve, reject) => {
         sql(browser).then(resolve);
-      })
-    );
-  }
-  for (let index = 0; index < loops; index++) {
-    myPromise.push(
+      }),
       new Promise((resolve, reject) => {
         html(browser).then(resolve);
-      })
-    );
-  }
-  for (let index = 0; index < loops; index++) {
-    myPromise.push(
+      }),
       new Promise((resolve, reject) => {
         cors(browser).then(resolve);
       })
     );
   }
+
   return myPromise;
 }
 
 module.exports.start = async function () {
   const browser = await puppeteer.launch({ headless: true });
 
-  let result = await Promise.allSettled(staticLoops(browser, (loops = 3)));
+  let result = await Promise.allSettled(staticLoops(browser, (loops = 5)));
 
   await browser.close();
   return result;

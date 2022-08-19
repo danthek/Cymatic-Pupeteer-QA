@@ -23,6 +23,6 @@ Storelaunchers.setRegister(false);
   //Comment/uncomment the desired launchers as needed
   Promise.allSettled([
     clientSiteAuth.start(),
-    /* staticIncidents.start(), */
+    /*  staticIncidents.start(), */
   ]).then((success) => inspect(success), console.error.bind(console));
 })();
