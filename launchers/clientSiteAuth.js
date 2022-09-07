@@ -27,9 +27,9 @@ function createPromise(browser, registerTest, loginTest, loops) {
 module.exports.start = async function () {
   var loginTest = Storelaunchers.getlogin();
   var registerTest = Storelaunchers.getRegister();
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   let result = await Promise.allSettled(
-    createPromise(browser, registerTest, loginTest, (loops = 5))
+    createPromise(browser, registerTest, loginTest, (loops = 1))
   );
   await browser.close();
   return result;

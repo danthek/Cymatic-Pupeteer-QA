@@ -49,7 +49,7 @@ module.exports = async function () {
   // Ensure the password gets created following the criterias
   checkRegex(newPass);
   while (!validPass) {
-    newPass = generate((field = 'pass'), (length = 12));
+    newPass = generate((field = 'pass'), (length = 13));
     checkRegex(newPass);
   }
   return (

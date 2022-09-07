@@ -10,8 +10,11 @@ module.exports = async function (browser) {
 
   const page = await browser.newPage();
   await page.goto('http://localhost:3000/signup');
-  await page.waitForTimeout(5000);
-
+  await page.reload();
+  await page.waitForTimeout(3000);
+  await page.reload();
+  await page.waitForTimeout(3000);
+  await page.reload();
   await page.type('#form > input:nth-child(2)', userNew, { delay: 100 });
   await page.type('#pass', passNew, { delay: 100 });
   await page.type('#form > input:nth-child(6)', passNew, { delay: 100 });
